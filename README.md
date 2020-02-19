@@ -1,3 +1,4 @@
-# Go Web Programming
+# B"H
 
-This is the code repository for the Go Web Programming book
+## Go Web Programming
+- Live Book: https://livebook.manning.com/book/go-web-programming/about-this-book/0
