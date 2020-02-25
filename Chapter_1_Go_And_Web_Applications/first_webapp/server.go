@@ -1,5 +1,15 @@
 package main
 
+/*
+-- ------------------------------------
+Walkthrough:
+
+1: go run server.go
+
+2: Open browser to http://localhost:8080/
+-- ------------------------------------
+*/
+
 import (
 	"fmt"
 	"net/http"
