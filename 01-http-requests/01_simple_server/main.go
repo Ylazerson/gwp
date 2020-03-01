@@ -1,0 +1,33 @@
+package main
+
+/*
+-- ------------------------------------
+Walkthrough:
+
+1: go run server.go
+
+2: Open browser to http://localhost:8090/
+-- ------------------------------------
+*/
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func handler(writer http.ResponseWriter, request *http.Request) {
+
+	fmt.Fprintf(
+		writer,
+		"Hello World, %s!",
+		request.URL.Path[1:],
+	)
+
+}
+
+func main() {
+
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":8090", nil)
+
+}
