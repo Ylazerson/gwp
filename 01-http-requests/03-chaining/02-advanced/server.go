@@ -13,6 +13,11 @@ func hello(w http.ResponseWriter, r *http.Request) {
 }
 
 // -- --------------------------------
+func world(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "World!")
+}
+
+// -- --------------------------------
 // This takes in a HandlerFunc and returns a HandlerFunc
 // COOOOOOOL
 func log(h http.HandlerFunc) http.HandlerFunc {
@@ -36,6 +41,7 @@ func main() {
 	}
 
 	http.HandleFunc("/hello", log(hello))
+	http.HandleFunc("/world", log(world))
 
 	server.ListenAndServe()
 }
