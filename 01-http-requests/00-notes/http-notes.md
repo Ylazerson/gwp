@@ -37,6 +37,12 @@
 curl -i -X GET http://www.b7forum.com
 ```
 
-6. HTTP Multiplexer:
+
+6. Go HTTP Multiplexer:
 
 ![](multiplexer.png)
+
+
+7. Go `net/http` pkg:
+
+![](http-library.png)
