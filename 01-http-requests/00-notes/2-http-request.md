@@ -24,7 +24,7 @@ User-Agent: Mozilla/5.0
 
 ---
 
-### Request Methods
+### HTTP Request Methods
 
 ![](img/request-methods.png)
 
