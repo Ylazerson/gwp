@@ -55,3 +55,6 @@ HTTP request headers are mostly optional. The only mandatory header in HTTP 1.1 
 See `01-http/07-req-header/server.go`
 
 ![](img/go-req-hdr.png)
+
+
+
