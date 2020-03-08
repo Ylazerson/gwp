@@ -38,3 +38,20 @@ Request headers are colon-separated name-value pairs in plain text, terminated b
 HTTP request headers are mostly optional. The only mandatory header in HTTP 1.1 is the Host header field. But if the message has a message body (which is optional, depending on the method), you’ll need to have either the **Content-Length** or the **Transfer-Encoding** header fields. 
 
 ![](img/request-headers.png)
+
+
+---
+
+### Opaque vs Hierarchical URI
+
+![](img/opaque.png)
+
+### Golang Request URL Struct
+
+![](img/go-url.png)
+
+### Golang Request Header Map
+
+See `01-http/07-req-header/server.go`
+
+![](img/go-req-hdr.png)
