@@ -18,7 +18,7 @@
 
 2. Basic Web App:
 
-![](basic-app.png)
+![](img/basic-app.png)
 
 
 3. HTTP is the **application-level** communications protocol that powers the World Wide Web.
@@ -40,9 +40,9 @@ curl -i -X GET http://www.b7forum.com
 
 6. Go HTTP Multiplexer:
 
-![](multiplexer.png)
+![](img/multiplexer.png)
 
 
 7. Go `net/http` pkg:
 
-![](http-library.png)
+![](img/http-library.png)
