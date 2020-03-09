@@ -72,3 +72,15 @@ HTML allows the method attribute in form to be either POST or GET, so this is al
 
 In this case, there’s no request body (GET requests have no request body), and all the data is set in the URL as name-value pairs.
 
+---
+
+### Golang Ways to Access Form Data
+
+**Note, there actually a few ways - see pages 74 - 82 for details.**
+- However, in general, just use **`PostFormValue`**. 
+- Unless you need key-value pairs from the URL or are uploading files.
+
+
+![](img/go-form.png)
+
+- See `01-http/08-form/` example.
