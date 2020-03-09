@@ -84,3 +84,17 @@ In this case, there’s no request body (GET requests have no request body), and
 ![](img/go-form.png)
 
 - See `01-http/08-form/` example.
+
+---
+
+### Processing POST requests with JSON body
+
+Remember, not all **POST requests** will come from **HTML forms**. 
+- Sending **POST requests** is increasingly common with **client libraries** such as **JQuery** as well as **client-side frameworks** such as **Angular** or **Ember**.
+
+**Client frameworks** encode their **POST requests** differently. 
+- **JQuery** encodes **POST requests** like an **HTML form** with `application/x-www-form-urlencoded` (that is, it sets the **request header** **`Content-Type`** to `application/x-www-form-urlencoded`) 
+- **Angular** encodes **POST requests** with `application/json`. 
+- Etc.
+
+In short, you'll need to see the client framework/library docs.
