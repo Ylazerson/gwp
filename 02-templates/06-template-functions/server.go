@@ -12,9 +12,13 @@ func formatDate(t time.Time) string {
 }
 
 func process(w http.ResponseWriter, r *http.Request) {
+
 	funcMap := template.FuncMap{"fdate": formatDate}
+
 	t := template.New("tmpl.html").Funcs(funcMap)
+
 	t, _ = t.ParseFiles("tmpl.html")
+
 	t.Execute(w, time.Now())
 }
 
