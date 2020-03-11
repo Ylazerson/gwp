@@ -42,13 +42,14 @@ func getCookie(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Cannot get the first cookie")
 	}
 
-	// -- -----------------------------
-	// Get all cookies:
-	cs := r.Cookies()
+	val, _ := base64.URLEncoding.DecodeString(c1.Value)
+	fmt.Fprintln(w, string(val))
 
 	// -- -----------------------------
-	fmt.Fprintln(w, c1)
-	fmt.Fprintln(w, cs)
+	// Get all cookies:
+	cookies := r.Cookies()
+	fmt.Fprintln(w, cookies)
+
 }
 
 // -- ---------------------------------
