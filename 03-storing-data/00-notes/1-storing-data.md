@@ -28,3 +28,6 @@ The book explores two ways of storing data to files in Go:
     - Gob is a **binary format** that can be saved in a file, providing a quick and effective means of serializing in-memory data to one or more files. 
 
 See chapter 6 for details.
+
+#### Database Storage
+- See `04-sql` dir.
