@@ -43,6 +43,9 @@ PATCH /user/456 HTTP/1.1
 ### Struct Tags
 - Go uses them to determine the mapping between the struct and the JSON (can be other format like XML etc.) elements using them. 
 
+The rules for mapping the structs to JSON using struct tags are easier than with XML. 
+    - There is only **one** common rule for mapping. If you want to store the JSON value, given the JSON key, you create a field in the struct (with any name) and map it with the struct tag `json:"<name>"`, where `<name>` is the name of the JSON key.
+
 **Struct JSON Tags Example:**
 
 ```go
@@ -59,4 +62,38 @@ type Post struct {
 - The value must be a string between double quotes `""`.
 - Remember that **strings** in Go are created using the double quotes and backticks. Single quotes are used for **runes** (an int32 that represents a Unicode code point) only. 
 - Note that because of the way Go does the mapping, the struct and all the fields in the struct that you create must be public, which means the names need to be capitalized.
+
+---
+
+### JSON-to-Structs 
+
+**Approach 1:**
+
+![](img/json-to-struct-1.png)
+
+**Approach 2:**
+
+![](img/json-to-struct-2.png)
+
+**Important Note:**
+So when do we use `Decoder` versus `Unmarshal`? 
+ - That depends on the **input**. 
+ - If your data is coming from an `io.Reader` **stream**, like the Body of an `http.Request`, use `Decoder`. 
+ - If you have the data in a string or somewhere in memory, use `Unmarshal`.
+
+---
+
+### Structs-to-JSON
+
+**Approach 1:**
+
+![](img/struct-to-json-1.png)
+
+**Approach 2:**
+
+![](img/struct-to-json-2.png)
+
+- Errata: should say JSON not XML.
+
+
 
