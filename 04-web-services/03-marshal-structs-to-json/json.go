@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 )
 
+// -- -------------------------------------
 type Post struct {
 	Id       int       `json:"id"`
 	Content  string    `json:"content"`
@@ -24,8 +25,11 @@ type Comment struct {
 	Author  string `json:"author"`
 }
 
+// -- -------------------------------------
 func main() {
 
+	// -- ---------------------------------
+	// Create Post struct instance:
 	post := Post{
 		Id:      1,
 		Content: "Hello World!",
@@ -47,12 +51,19 @@ func main() {
 		},
 	}
 
+	// -- ---------------------------------
+	// Marshal Struct into JSON:
 	output, err := json.MarshalIndent(&post, "", "\t\t")
+
 	if err != nil {
 		fmt.Println("Error marshalling to JSON:", err)
 		return
 	}
+
+	// -- ---------------------------------
+	// Write JSON file:
 	err = ioutil.WriteFile("post.json", output, 0644)
+
 	if err != nil {
 		fmt.Println("Error writing JSON to file:", err)
 		return
