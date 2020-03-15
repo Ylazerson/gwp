@@ -8,13 +8,17 @@ import (
 // -- -----------------------------------------
 // Test the decode function:
 func TestDecode(t *testing.T) {
+
 	post, err := decode("post.json")
+
 	if err != nil {
 		t.Error(err)
 	}
+
 	if post.Id != 1 {
 		t.Error("Post ID is not the same as post.json", post.Id)
 	}
+
 	if post.Content != "Hello World!" {
 		t.Error("Post content is not the same as post.json", post.Id)
 	}
@@ -23,13 +27,17 @@ func TestDecode(t *testing.T) {
 // -- -----------------------------------------
 // Test the unmarshal function:
 func TestUnmarshal(t *testing.T) {
+
 	post, err := unmarshal("post.json")
+
 	if err != nil {
 		t.Error(err)
 	}
+
 	if post.Id != 1 {
 		t.Error("Post ID is not the same as post.json", post.Id)
 	}
+
 	if post.Content != "Hello World!" {
 		t.Error("Post content is not the same as post.json", post.Id)
 	}
