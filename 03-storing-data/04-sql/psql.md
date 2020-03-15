@@ -31,6 +31,9 @@ Run `psql` then can use following:
 
 ```sh
 
+# Grant snippet:
+grant all privileges on database gwp to gwp;
+
 # Show databases:
 \l
 
