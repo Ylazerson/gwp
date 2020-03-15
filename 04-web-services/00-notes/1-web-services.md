@@ -63,6 +63,13 @@ type Post struct {
 - Remember that **strings** in Go are created using the double quotes and backticks. Single quotes are used for **runes** (an int32 that represents a Unicode code point) only. 
 - Note that because of the way Go does the mapping, the struct and all the fields in the struct that you create must be public, which means the names need to be capitalized.
 
+
+---
+
+### Marshalling
+- In computer science, **marshalling** is the process of transforming the memory representation of an object to a data format suitable for storage or transmission.
+- The inverse of **marshalling** is called **unmarshalling** (or **demarshalling**). 
+
 ---
 
 ### JSON-to-Structs 

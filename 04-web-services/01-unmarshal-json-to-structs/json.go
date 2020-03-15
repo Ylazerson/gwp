@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// -- -------------------------------------
 type Post struct {
 	Id       int       `json:"id"`
 	Content  string    `json:"content"`
@@ -25,22 +26,37 @@ type Comment struct {
 	Author  string `json:"author"`
 }
 
+// -- -------------------------------------
 func main() {
+
+	// -- ---------------------------------
+	// Open JSON file:
 	jsonFile, err := os.Open("post.json")
+
 	if err != nil {
 		fmt.Println("Error opening JSON file:", err)
 		return
 	}
+
 	defer jsonFile.Close()
+
+	// -- ---------------------------------
+	// Read file contents into var:
 	jsonData, err := ioutil.ReadAll(jsonFile)
+
 	if err != nil {
 		fmt.Println("Error reading JSON data:", err)
 		return
 	}
 
 	fmt.Println(string(jsonData))
+
+	// -- ---------------------------------
+	// Unmarshal JSON into Struct
 	var post Post
+
 	json.Unmarshal(jsonData, &post)
+
 	fmt.Println(post.Id)
 	fmt.Println(post.Content)
 	fmt.Println(post.Author.Id)
