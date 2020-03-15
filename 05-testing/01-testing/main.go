@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
-  "io/ioutil"
 )
 
+// -- -----------------------------------------
 type Post struct {
 	Id       int       `json:"id"`
 	Content  string    `json:"content"`
@@ -25,6 +26,7 @@ type Comment struct {
 	Author  string `json:"author"`
 }
 
+// -- -----------------------------------------
 // decode JSON from file to struct
 func decode(filename string) (post Post, err error) {
 	jsonFile, err := os.Open(filename)
@@ -43,6 +45,7 @@ func decode(filename string) (post Post, err error) {
 	return
 }
 
+// -- -----------------------------------------
 func unmarshal(filename string) (post Post, err error) {
 	jsonFile, err := os.Open(filename)
 	if err != nil {
@@ -56,31 +59,17 @@ func unmarshal(filename string) (post Post, err error) {
 		fmt.Println("Error reading JSON data:", err)
 		return
 	}
-	json.Unmarshal(jsonData, &post)  
-  return
+	json.Unmarshal(jsonData, &post)
+	return
 }
 
-// Iterative Fibonacci
-func fibonacciIterative(n int) int {
-    current, prev := 0, 1
-    for i := 0; i < n; i++ {
-        current, prev = current + prev, current
-    }
-    return current
-}
-
-// Recursive Fibonacci
-func fibonacciRecursive(n int) int {
-    if n < 2 {
-        return n
-    } 
-    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2)
-}
-
+// -- -----------------------------------------
 func main() {
 	post, err := decode("post.json")
+
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
+
 	fmt.Println("Post is", post)
 }
