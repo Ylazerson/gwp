@@ -1,32 +1,79 @@
+// B''H
+
 package main
+
+/*
+// -- ------------------------------------
+WALKTHROUGH:
+
+1:
+    go mod init sandbox/gotestdi
+
+2:
+    go install
+
+3: (no need to start the web server)
+    go test -v
+// -- ------------------------------------
+*/
 
 import (
 	"database/sql"
 	"encoding/json"
-	_ "github.com/lib/pq"
 	"net/http"
 	"path"
 	"strconv"
+
+	_ "github.com/lib/pq"
 )
 
+// -- ------------------------------------
 func main() {
-	// connect to the Db
+
+	// -- --------------------------------
+	// Connect to the database:
 	var err error
-	db, err := sql.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
+
+	db, err := sql.Open(
+		"postgres", 
+		"user=gwp dbname=gwp password=gwp sslmode=disable"
+	)
+	
 	if err != nil {
 		panic(err)
 	}
 
+	// -- --------------------------------
 	server := http.Server{
 		Addr: "127.0.0.1:8080",
 	}
-	http.HandleFunc("/post/", handleRequest(&Post{Db: db}))
+
+	// -- --------------------------------
+	http.HandleFunc(		
+		// -- ----------------------------
+		"/post/", 
+		// -- ----------------------------
+		// Note the DI - we inject the db dependency 
+		handleRequest(
+			&Post{Db: db},
+		),
+	)
+	
+	// -- --------------------------------
 	server.ListenAndServe()
 }
 
-
-// main handler function
+// -- ------------------------------------
+// Main handler function.
+//
+// Note:
+// 1. Text interface is param.
+// 2. It returns a func with correct signature.
+// 3. Passes on Text interface to each handler.
+//
 func handleRequest(t Text) http.HandlerFunc {
+
+	// -- --------------------------------
 	return func(w http.ResponseWriter, r *http.Request) {
 		var err error
 		switch r.Method {
@@ -46,6 +93,7 @@ func handleRequest(t Text) http.HandlerFunc {
 	}
 }
 
+// -- ------------------------------------
 // Retrieve a post
 // GET /post/1
 func handleGet(w http.ResponseWriter, r *http.Request, post Text) (err error) {
@@ -66,6 +114,7 @@ func handleGet(w http.ResponseWriter, r *http.Request, post Text) (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Create a post
 // POST /post/
 func handlePost(w http.ResponseWriter, r *http.Request, post Text) (err error) {
@@ -81,6 +130,7 @@ func handlePost(w http.ResponseWriter, r *http.Request, post Text) (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Update a post
 // PUT /post/1
 func handlePut(w http.ResponseWriter, r *http.Request, post Text) (err error) {
@@ -104,6 +154,7 @@ func handlePut(w http.ResponseWriter, r *http.Request, post Text) (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Delete a post
 // DELETE /post/1
 func handleDelete(w http.ResponseWriter, r *http.Request, post Text) (err error) {

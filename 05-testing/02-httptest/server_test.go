@@ -69,7 +69,7 @@ func TestHandleGet(t *testing.T) {
 func TestHandlePut(t *testing.T) {
 
 	// -- --------------------------------
-	json := strings.NewReader(`{"content":"Updated post","author":"Sau Sheong"}`)
+	json := strings.NewReader(`{"content":"Wazzzzzup","author":"Sau Sheong"}`)
 
 	// -- --------------------------------
 	request, _ := http.NewRequest("PUT", "/post/1", json)

@@ -1,15 +1,25 @@
+// B''H
+
 package main
 
 import (
 	"database/sql"
+
 	_ "github.com/lib/pq"
 )
 
+// -- ------------------------------------
+// Note, instead of using a global sql.DB struct,
+// we use the one passed to the method through
+// the Post struct as a field.
+// -- ------------------------------------
+
+// -- ------------------------------------
 type Text interface {
-  fetch(id int) (err error)
-  create() (err error)
-  update() (err error)
-  delete() (err error)
+	fetch(id int) (err error)
+	create() (err error)
+	update() (err error)
+	delete() (err error)
 }
 
 type Post struct {
@@ -19,12 +29,14 @@ type Post struct {
 	Author  string `json:"author"`
 }
 
+// -- ------------------------------------
 // Get a single post
 func (post *Post) fetch(id int) (err error) {
 	err = post.Db.QueryRow("select id, content, author from posts where id = $1", id).Scan(&post.Id, &post.Content, &post.Author)
 	return
 }
 
+// -- ------------------------------------
 // Create a new post
 func (post *Post) create() (err error) {
 	statement := "insert into posts (content, author) values ($1, $2) returning id"
@@ -37,12 +49,14 @@ func (post *Post) create() (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Update a post
 func (post *Post) update() (err error) {
 	_, err = post.Db.Exec("update posts set content = $2, author = $3 where id = $1", post.Id, post.Content, post.Author)
 	return
 }
 
+// -- ------------------------------------
 // Delete a post
 func (post *Post) delete() (err error) {
 	_, err = post.Db.Exec("delete from posts where id = $1", post.Id)

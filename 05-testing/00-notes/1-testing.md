@@ -115,3 +115,24 @@ func TestMain(m *testing.M) {
     os.Exit(code)
 }
 ```
+
+---
+
+### Test doubles and dependency injection
+
+Until this point, when you run the unit test cases, you're actually getting and modifying data in the database. This is a **dependency**, and therefore the test cases aren't as **independent** as you'd like them to be.
+
+One popular way of making the unit test cases more independent is using **test doubles**. Test doubles are simulations of objects, structures, or functions that are used during testing when it’s inconvenient to use the actual object, structure, or function.
+
+One of the ways you can design for **test doubles** is to use the **dependency injection** design pattern. Dependency injection is a software design pattern that allows you to **decouple** the dependencies between two or more layers of software. This is done through **passing** a dependency to the called object, structure, or function. This dependency is used to perform the action instead of the object, structure, or function. In Go, this dependency is often an **interface type**.
+
+---
+
+In our example (see `03-dependency-injection` dir), we will decouple `sql.DB`.
+
+See the book for futher details (section 8.4).
+
+
+
+
+
