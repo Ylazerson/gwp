@@ -35,10 +35,10 @@ func main() {
 	var err error
 
 	db, err := sql.Open(
-		"postgres", 
-		"user=gwp dbname=gwp password=gwp sslmode=disable"
+		"postgres",
+		"user=gwp dbname=gwp password=gwp sslmode=disable",
 	)
-	
+
 	if err != nil {
 		panic(err)
 	}
@@ -49,16 +49,16 @@ func main() {
 	}
 
 	// -- --------------------------------
-	http.HandleFunc(		
+	http.HandleFunc(
 		// -- ----------------------------
-		"/post/", 
+		"/post/",
 		// -- ----------------------------
-		// Note the DI - we inject the db dependency 
+		// Note the DI - we inject the db dependency
 		handleRequest(
 			&Post{Db: db},
 		),
 	)
-	
+
 	// -- --------------------------------
 	server.ListenAndServe()
 }
