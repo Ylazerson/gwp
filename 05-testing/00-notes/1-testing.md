@@ -78,3 +78,40 @@ If you want to keep it simple, you can ignore the functional tests by using `-ru
 ```sh
 go test -run x -bench .
 ```
+
+
+
+
+---
+
+### HTTP Testing 
+
+The `httptest` package provides facilities to simulate a web server, allowing you to use the **client** functions of the `net/http` package to send an **HTTP request** and capturing the **HTTP response** that’s returned.
+
+---
+
+Let’s look at the **unit test** for when a **HTTP GET request** comes in:
+
+![](img/httptest.png)
+
+
+---
+
+### Test setup/teardown
+
+Common test code (and other test fixtures) can be placed together in a setup function that prepares the test cases for execution.
+
+Go's `testing` package provides a `TestMain` function that allows you to do whatever setup or teardown is necessary. 
+- `setUp` and `tearDown` are functions you can define to do setup and teardown for all your test case functions. 
+- Note that `setUp` and `tearDown` are run only once for all test cases. 
+- The individual test case functions are called by calling `m.Run()`  
+- `m.Run()` returns an exit code, which you can pass to the `os.Exit` function.
+
+```go
+func TestMain(m *testing.M) {
+    setUp()
+    code := m.Run()
+    tearDown()
+    os.Exit(code)
+}
+```

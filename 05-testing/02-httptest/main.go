@@ -1,3 +1,20 @@
+// B"H
+
+/*
+// -- ------------------------------------
+WALKTHROUGH:
+
+1:
+    go mod init sandbox/gohttptest
+
+2:
+    go install
+
+3: (no need to start the web server)
+    go test -v
+// -- ------------------------------------
+*/
+
 package main
 
 import (
@@ -7,6 +24,7 @@ import (
 	"strconv"
 )
 
+// -- ------------------------------------
 type Post struct {
 	Id      int    `json:"id"`
 	Content string `json:"content"`
@@ -21,6 +39,7 @@ func main() {
 	server.ListenAndServe()
 }
 
+// -- ------------------------------------
 // main handler function
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	var err error
@@ -40,6 +59,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// -- ------------------------------------
 // Retrieve a post
 // GET /post/1
 func handleGet(w http.ResponseWriter, r *http.Request) (err error) {
@@ -60,6 +80,7 @@ func handleGet(w http.ResponseWriter, r *http.Request) (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Create a post
 // POST /post/
 func handlePost(w http.ResponseWriter, r *http.Request) (err error) {
@@ -76,6 +97,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Update a post
 // PUT /post/1
 func handlePut(w http.ResponseWriter, r *http.Request) (err error) {
@@ -99,6 +121,7 @@ func handlePut(w http.ResponseWriter, r *http.Request) (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Delete a post
 // DELETE /post/1
 func handleDelete(w http.ResponseWriter, r *http.Request) (err error) {

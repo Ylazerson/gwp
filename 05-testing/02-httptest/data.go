@@ -2,9 +2,11 @@ package main
 
 import (
 	"database/sql"
+
 	_ "github.com/lib/pq"
 )
 
+// -- ------------------------------------
 var Db *sql.DB
 
 // connect to the Db
@@ -16,6 +18,7 @@ func init() {
 	}
 }
 
+// -- ------------------------------------
 // Get a single post
 func retrieve(id int) (post Post, err error) {
 	post = Post{}
@@ -23,6 +26,7 @@ func retrieve(id int) (post Post, err error) {
 	return
 }
 
+// -- ------------------------------------
 // Create a new post
 func (post *Post) create() (err error) {
 	statement := "insert into posts (content, author) values ($1, $2) returning id"
@@ -35,12 +39,14 @@ func (post *Post) create() (err error) {
 	return
 }
 
+// -- ------------------------------------
 // Update a post
 func (post *Post) update() (err error) {
 	_, err = Db.Exec("update posts set content = $2, author = $3 where id = $1", post.Id, post.Content, post.Author)
 	return
 }
 
+// -- ------------------------------------
 // Delete a post
 func (post *Post) delete() (err error) {
 	_, err = Db.Exec("delete from posts where id = $1", post.Id)
