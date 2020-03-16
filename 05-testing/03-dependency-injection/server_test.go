@@ -64,7 +64,7 @@ func TestPutPost(t *testing.T) {
 	mux.HandleFunc("/post/", handleRequest(post))
 
 	writer := httptest.NewRecorder()
-	json := strings.NewReader(`{"content":"Updated post","author":"Sau Sheong"}`)
+	json := strings.NewReader(`{"content":"This aint gonna hit the db","author":"Sau Sheong"}`)
 	request, _ := http.NewRequest("PUT", "/post/1", json)
 	mux.ServeHTTP(writer, request)
 
@@ -72,7 +72,7 @@ func TestPutPost(t *testing.T) {
 		t.Error("Response code is %v", writer.Code)
 	}
 
-	if post.Content != "Updated post" {
+	if post.Content != "This aint gonna hit the db" {
 		t.Error("Content is not correct", post.Content)
 	}
 }
