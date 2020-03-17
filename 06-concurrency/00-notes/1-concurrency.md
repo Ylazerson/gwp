@@ -51,3 +51,88 @@ fatal error: all goroutines are asleep - deadlock!
 ```
 
 ---
+
+
+### Channels
+
+You can think of a **channel** as a box. Goroutines can talk to each other only through this box. If a goroutine wants to pass something to another goroutine, it must place something in this box for the corresponding goroutine to retrieve:
+
+![](img/unbuffered-channel.png)
+
+---
+
+Channels are **typed** values that allow goroutines to communicate with each other. 
+
+Channels are allocated using `make`, and the resulting value is a **reference** to an underlying data structure. This, for example, allocates a channel of integers:
+
+```go
+ch := make(chan int)
+```
+
+---
+
+#### Unbuffered Channels
+
+Channels are, by default, **unbuffered**.  
+
+Unbuffered channels are **synchronous**. You can think of unbuffered channels as a box that can contain only one thing at a time. Once a goroutine puts something into this box, no other goroutines can put anything in, unless another goroutine takes out whatever is inside it first. This means if another goroutine wants to put in something else when the box contains something already, it will block and go to sleep until the box is empty.
+
+Similarly, if a goroutine tries to take out something from this box and it’s empty, it’ll block and go to sleep until the box has something in it.
+
+---
+
+#### Buffered Channels
+
+**Buffered channels** are **asynchronous**, **first-in, first-out (FIFO)** message queues. 
+
+A goroutine can continually add things into this box without blocking until there’s no more space in the box. Similarly, another goroutine can continually remove things from this box (in the same sequence it was put in) and will only block when it runs out of things to remove
+
+Buffered channels are useful when limiting throughput. If you have a limited number of processes to work on your problem and you want to throttle the number of requests coming in to your processes, buffered channels allow you to do exactly that.
+
+![](img/buffered-channel.png)
+
+This creates a **buffered channel** of integers with the size 10:
+
+```go 
+ch := make(chan int, 10)
+```
+
+---
+
+#### Using Channels
+
+This puts an integer 1 into the channel ch:
+
+```go
+ch <- 1
+```
+
+
+This removes the value from the channel and assigns it to the variable i:
+
+```go
+i := <- ch
+```
+
+---
+
+Channels can be **directional**. By default, channels work both ways (**bidirectional**) and values can be sent to or received from it. But channels can be restricted to send-only or receive-only. 
+
+This allocates a **send-only** channel of strings:
+
+```go
+ch := make(chan <- string)
+```
+
+This allocates a **receive-only** channel of strings:
+
+```go
+ch := make(<-chan string)
+```
+
+---
+
+Although channels can be allocated to be directional, they can also be allocated as bidirectional but returned as directional. You’ll see an example of this near the end of this chapter.
+
+---
+
