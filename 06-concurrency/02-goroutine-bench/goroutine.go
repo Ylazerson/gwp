@@ -4,7 +4,16 @@ package main
 import "time"
 
 // -- -------------------------------
-// go test -run x -bench .
+/*
+Benchmark with 2 CPU's:
+go test -run x -bench . -cpu 2
+
+Benchmark with 4 CPU's:
+go test -run x -bench . -cpu 4
+
+Benchmark with all available CPU's:
+go test -run x -bench .
+*/
 // -- -------------------------------
 
 func numsNoSleep() {
