@@ -136,3 +136,16 @@ Although channels can be allocated to be directional, they can also be allocated
 
 ---
 
+### Selecting Channels
+
+Go has a special keyword, `select`, that allows you to select one of many channels to receive from or send to. Think of the `select` statement like a `switch` statement but for channels.
+
+---
+
+**Closing Channels**
+- Channels can be closed using the `close` built-in function. 
+- Closing a channel indicates to the **receiver** that no more values will be sent to the channel. 
+- Sending to or closing an already closed channel causes a panic.
+- A closed channel is never blocked and always returns the zero value for the channel’s type.
+- Note, you can't close a **receive-only** channel. 
+- It's perfectly all right not to close them. As mentioned, closing channels just means telling the receiver that nothing else is coming through. 

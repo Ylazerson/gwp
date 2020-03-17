@@ -1,9 +1,12 @@
+// B''H
+
 package main
 
 import (
 	"fmt"
 )
 
+// -- ------------------------------------
 func callerA(c chan string) {
 	c <- "Hello World!"
 	close(c)
@@ -14,45 +17,35 @@ func callerB(c chan string) {
 	close(c)
 }
 
+// -- ------------------------------------
 func main() {
 	a, b := make(chan string), make(chan string)
+
 	go callerA(a)
 	go callerB(b)
+
+	// -- --------------------------------
+	// Loop thru open channels:
+
 	var msg string
 	openA, openB := true, true
+
 	for openA || openB {
+
+		// In each iteration the Go runtime determines
+		// whether you receive from channel a or channel b,
+		// depending on the channel that has a value at
+		// the time of selection.
+		// If both are available, the Go runtime will randomly pick one.
 		select {
 		case msg, openA = <-a:
 			if openA {
 				fmt.Printf("%s from A\n", msg)
-			}			
+			}
 		case msg, openB = <-b:
 			if openB {
 				fmt.Printf("%s from B\n", msg)
-			}			
+			}
 		}
 	}
 }
-
-// func main() {
-// 	a, b := make(chan string), make(chan string)
-// 	go callerA(a)
-// 	go callerB(b)
-// 	msg1, msg2 := "A", "B"
-// 	for {
-// 		time.Sleep(1 * time.Microsecond)
-//
-// 		select {
-// 		case msg1 = <-a:
-// 			fmt.Printf("%s from A\n", msg1)
-// 		case msg2 = <-b:
-// 			fmt.Printf("%s from B\n", msg2)
-// 		// default:
-// 		// 	fmt.Println("Default")
-// 		}
-// 		if msg1 == "" && msg2 == "" {
-// 			break
-// 		}
-//
-// 	}
-// }
