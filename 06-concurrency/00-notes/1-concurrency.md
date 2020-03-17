@@ -3,6 +3,8 @@
 
 ### Concurrency
 
+**Note, all the discussion below is just the tip of the iceberg for Go concurrency.**
+
 > Concurrency is about dealing with lots of things at once. Parallelism is about doing lots of things at once.
 >
 > -- <cite>Rob Pike, co-creator of Go</cite>
@@ -149,3 +151,4 @@ Go has a special keyword, `select`, that allows you to select one of many channe
 - A closed channel is never blocked and always returns the zero value for the channel’s type.
 - Note, you can't close a **receive-only** channel. 
 - It's perfectly all right not to close them. As mentioned, closing channels just means telling the receiver that nothing else is coming through. 
+
